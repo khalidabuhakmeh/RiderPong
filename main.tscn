@@ -129,7 +129,6 @@ text = "0"
 label_settings = SubResource("LabelSettings_tjesr")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="Player" type="Area2D" parent="." node_paths=PackedStringArray("ScoreDisplay")]
 position = Vector2(92, 360)
@@ -158,7 +157,6 @@ text = "0"
 label_settings = SubResource("LabelSettings_tjesr")
 horizontal_alignment = 1
 vertical_alignment = 1
-metadata/_edit_lock_ = true
 
 [node name="Ball" type="Area2D" parent="."]
 position = Vector2(643, 361)
