@@ -17,15 +17,20 @@ config/icon="res://assets/icon.svg"
 
 [display]
 
-window/size/viewport_width=2560
-window/size/viewport_height=1440
-window/stretch/mode="canvas_items"
-window/stretch/scale=2.1
-window/stretch/scale_mode="integer"
+window/size/viewport_width=1280
+window/size/viewport_height=720
+window/size/resizable=false
+window/stretch/mode="viewport"
 
 [dotnet]
 
 project/assembly_name="Rider Pong"
+
+[importer_defaults]
+
+animation_library={
+"animation/fps": 60.0
+}
 
 [rendering]
 

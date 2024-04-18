@@ -5,16 +5,18 @@ public partial class Player : Area2D, IHasScore
 {
 	[Export]
 	private int moveSpeed = 200;
+	public AudioStreamPlayer ScoreSound { get; set; }
+	[Export]
+	public Label ScoreDisplay { get; set; }
+	public int Score { get; set; }
 
-	[Export] private Label PlayerScoreDisplay;
-	
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ScoreSound = GetNode<AudioStreamPlayer>("ScoreSound");
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
 		// Move up and down based on input.
 		var input = Input.GetActionStrength("ui_down") - Input.GetActionStrength("ui_up");
@@ -23,7 +25,7 @@ public partial class Player : Area2D, IHasScore
 		position.Y = Mathf.Clamp(position.Y, 16, GetViewportRect().Size.Y - 16);
 		Position = position;
 	}
-
+	
 	private void OnAreaEntered(Area2D area)
 	{
 		if (area is Ball ball)
@@ -33,7 +35,4 @@ public partial class Player : Area2D, IHasScore
 		}
 	}
 
-	public int Score { get; set; }
-	[Export]
-	public Label ScoreDisplay { get; set; }
 }

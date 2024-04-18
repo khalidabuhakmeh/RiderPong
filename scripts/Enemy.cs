@@ -9,26 +9,25 @@ public partial class Enemy : Area2D, IHasScore
 	[Export]
 	private float difficulty = 0.3f;
 	
-	public int Score { get; set; } = 0;
+	public int Score { get; set; }
 	
 	[Export]
 	public Label ScoreDisplay { get; set; }
+	
+	public AudioStreamPlayer ScoreSound { get; set; }
 
-	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		
+		ScoreSound = GetNode<AudioStreamPlayer>("ScoreSound");
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public override void _PhysicsProcess(double delta)
 	{
-        // position.y = position.lerp(_ball.position, (MOVE_SPEED / 10) * delta).y
-        // complicated AI
-        Position = Position with
-        {
-	        Y = Position.Lerp(follow.Position, difficulty / 10).Y
-        };
+		Position = Position with
+		{
+			// don't leave the play field
+			Y = Math.Clamp(Position.Lerp(follow.Position, difficulty / 10).Y, 16, GetViewportRect().Size.Y - 16) 
+		};
 	}
 
 	private void OnAreaEntered(Area2D area)

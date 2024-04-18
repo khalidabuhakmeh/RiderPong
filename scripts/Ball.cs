@@ -1,47 +1,45 @@
-using Godot;
 using System;
+using Godot;
 
 public partial class Ball : Area2D
 {
-	[Export]
-	public double MoveSpeed = 10_000;
-	[Export]
-	public Vector2 Direction = Vector2.Left;
+    [Export] public double MoveSpeed = 10_000;
+    [Export] public Vector2 Direction = Vector2.Left;
 
-	private AudioStreamPlayer BounceSound;
-	
-	private double CurrentSpeed;
-	
-	private static readonly Vector2 StartingPoint = new() { X = 642, Y = 360 };
-	
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-		CurrentSpeed = MoveSpeed;
-		BounceSound = GetNode<AudioStreamPlayer>("Bounce");
-	}
+    private AudioStreamPlayer bounceSound;
+    private double currentSpeed;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-		CurrentSpeed += delta * 2;		
-		Position = Position with
-		{
-			X = (float)(Position.X + MoveSpeed * delta * Direction.X),
-			Y = (float)(Position.Y + MoveSpeed * delta * Direction.Y)
-		};
-	}
+    private static readonly Vector2 StartingPoint = new() { X = 642, Y = 360 };
 
-	public void Reset(Vector2 direction)
-	{
-		Direction = direction;
-		Position = StartingPoint;
-		CurrentSpeed = MoveSpeed;
-	}
+    // Called when the node enters the scene tree for the first time.
+    public override void _Ready()
+    {
+        currentSpeed = MoveSpeed;
+        bounceSound = GetNode<AudioStreamPlayer>("Bounce");
+    }
 
-	public void Bounce(Vector2 direction)
-	{
-		Direction = direction;
-		BounceSound.Play();
-	}
+    // Called every frame. 'delta' is the elapsed time since the previous frame.
+    public override void _PhysicsProcess(double delta)
+    {
+        currentSpeed += delta * 2;
+
+        Position = Position with
+        {
+            X = (float)(Position.X + MoveSpeed * delta * Direction.X),
+            Y = (float)(Position.Y + MoveSpeed * delta * Direction.Y)
+        };
+    }
+
+    public void Reset(Vector2 direction)
+    {
+        Direction = direction;
+        Position = StartingPoint;
+        currentSpeed = MoveSpeed;
+    }
+
+    public void Bounce(Vector2 direction)
+    {
+        Direction = direction;
+        bounceSound.Play();
+    }
 }
