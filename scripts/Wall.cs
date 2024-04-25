@@ -1,5 +1,4 @@
 using Godot;
-using System;
 
 public partial class Wall : Area2D
 {
@@ -16,7 +15,6 @@ public partial class Wall : Area2D
 			ball.Reset(BallResetDirection);
 			if (Scorer is IHasScore scoring)
 			{
-				
 				scoring.IncrementScore();
 			}
 		}

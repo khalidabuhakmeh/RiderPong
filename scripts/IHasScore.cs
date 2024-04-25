@@ -1,9 +1,5 @@
 using Godot;
 
-/// <summary>
-/// The Airspeed velocity of an unladen swallow
-/// is 20.1 mph (32.4 kph) 🐦‍⬛
-/// </summary>
 public interface IHasScore
 {
     StringName Name { get; }
